@@ -210,6 +210,7 @@ class EventRegistration(Base):
     visitor_phone = Column(String(50), default="")
     status = Column(String(20), default="registered")
     registered_at = Column(DateTime, default=datetime.utcnow)
+    checked_in_at = Column(DateTime, nullable=True)
 
 
 class DisconnectRecord(Base):

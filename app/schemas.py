@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel
 
 
@@ -354,6 +354,7 @@ class EventRegistrationOut(BaseModel):
     visitor_phone: str
     status: str
     registered_at: datetime
+    checked_in_at: Optional[datetime] = None
 
     model_config = {"from_attributes": True}
 
@@ -381,3 +382,31 @@ class PopularExhibitOut(BaseModel):
     hall_id: int
     total_dwell_seconds: int
     favorite_count: int
+
+
+class HallOverviewOut(BaseModel):
+    hall_id: int
+    hall_name: str
+    time_range: str
+    online_count: int
+    total_visits: int
+    avg_dwell_seconds: float
+    total_favorites: int
+    qa_correct_rate: Optional[float]
+    total_registrations: int
+
+
+class TimelineEvent(BaseModel):
+    event_time: datetime
+    event_type: str
+    event_name: str
+    detail: dict = {}
+
+
+class SessionTimelineOut(BaseModel):
+    session_id: int
+    visitor_id: str
+    hall_id: int
+    hall_name: str
+    events: List[TimelineEvent]
+
